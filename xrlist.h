@@ -42,7 +42,7 @@ typedef struct xr_list_t {
  */
 xr_list_t *      xrlist_new( void );
 
-/* Private 
+/** \private 
  * Allocate a new xrlist item
  *
  * \return pointer to a new xrlist item 
@@ -62,7 +62,7 @@ void             xrlist_free( xr_list_t * list );
  * */
 void             xrlist_free_items( xr_list_t * list);
 
-/* Private
+/** \private
  * Free a single xrlist item
  *
  * \param item Pointer to the xrlist item to free
