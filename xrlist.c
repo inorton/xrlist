@@ -191,5 +191,23 @@ void * xrlist_shift ( xr_list_t * list )
 }
 
 
+xr_list_item_t * xrlist_insert_after( xr_list_item_t * item , void * object )
+{
+  xr_list_item_t * new = NULL;
+  assert( !( item == NULL ) );
+  assert( !( item->list == NULL ) );
+ 
+  new = xrlist_new_item();
+  if ( new != NULL ){
+    new->object = object;
+    new->list   = item->list;
+    new->prev   = item;
+    new->next   = item->next;
+    item->next  = new;
+    item->list->count++;
+  }
+  return new;
+}
+
 
 

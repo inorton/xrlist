@@ -108,6 +108,15 @@ xr_list_item_t * xrlist_unshift( xr_list_t * list, void * object );
  */
 void *           xrlist_shift( xr_list_t * list );
 
-
+/**
+ * Insert a new list item after prev
+ *
+ * \param item Pointer to the xrlist item you wish to add after
+ * \param object Pointer to the memory/object to be stored in the list after item
+ *
+ * \return A pointer to the xr_list_item_t just created.
+ * \return NULL if unable to allocate a new xr_list_item_t.
+ */
+xr_list_item_t * xrlist_insert_after( xr_list_item_t * item , void * object );
 
 #endif
