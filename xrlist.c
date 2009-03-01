@@ -51,6 +51,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
 
+/**
+ * \example list.c
+ * This example tests creating and using xrlist.
+ * This example demonstrates use of xrlist_new(), xrlist_push(), xrlist_pop(), xrlist_shift(), xrlist_unshift() and xrlist_free_items().
+ */
+
 xr_list_t * xrlist_new( void )
 {
   xr_list_t * list = malloc( 1 * sizeof(xr_list_t) );

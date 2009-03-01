@@ -5,10 +5,9 @@
 #include <string.h>
 
 /**
- * \class
- *
- *
- *
+ * \class xrlist
+ * A simple array like structure.
+ * xrlist is implemented as a double linked list storing a pointer to an arbitrary data item. It provides push, pop, shift and unshift operations.
  */
 
 /**
@@ -49,21 +48,23 @@ xr_list_t *      xrlist_new( void );
  */
 xr_list_item_t * xrlist_new_item ( void );
 
-/** Free an xrlist object but do not free it's items
+/** Free an xrlist object.
+ * Does not free the object pointer of each list item.
  *
  * \param list Pointer to the xrlist to free
  */
 void             xrlist_free( xr_list_t * list );
 
-/** Free an xrlist object including all it's list items, 
- * but do not free the object pointer in each item 
+/** Free an xrlist object including all it's list items.
+ * Also frees the object pointer of each list item.
  *
  * \param list Pointer to the xrlist to free
  * */
 void             xrlist_free_items( xr_list_t * list);
 
 /** \private
- * Free a single xrlist item
+ * Free a single xrlist item.
+ * Does not free the object pointer in this item.
  *
  * \param item Pointer to the xrlist item to free
  */

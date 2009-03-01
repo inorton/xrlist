@@ -2,92 +2,76 @@
 
 #include "xrlist.h"
 
-
+/* 
+ * Create an xrlist and fill it with ten strings 
+ * */
 int main( int argc, char** argv )
-{
+{  
 
+  /* Assign a new xrlist object */
   xr_list_t * mylist = xrlist_new();
-  /* add 10 integers to the list */
 
-  int x = 0;
-  char* foo = NULL;
-  while ( x < 10 )
+  /* Append items to the xrlist */
+  while ( mylist->count < 10 )
   {
-    foo = (char*) malloc(32 * sizeof(char));
-    sprintf(foo,"string %d",x);
-    printf("pushing [%s]\n",foo);
-    xrlist_push(mylist, (void*) foo);
-    x++;
+    char * ptr = (char*) malloc(32 * sizeof(char)); /* push this string onto the list */
+    sprintf(ptr,"string %d",mylist->count);
+
+    xrlist_push(mylist, (void*) ptr); /* store the pointer to our string */
   }
 
-  printf("-- iterate list --\n");
+  /* Iterate through all items in the list */
   xr_list_item_t * iter = mylist->head;
-  x = 0;
-  while ( iter != NULL )
+  while ( iter != NULL ) 
   {
-    printf("obj [0x%x] contains [%s]\n",(unsigned int) iter->object, (char*) iter->object );
-    iter = iter->next;
+    printf("obj [0x%x] contains [%s]\n",
+      (unsigned int) iter->object, (char*) iter->object );
+    iter = iter->next; /* move to the next item, iter->next will be NULL when we reach the tail */
   }
 
-  printf("-- pop list --\n");
-
+  /* Remove all items from the list starting at the last item */
   while ( mylist->count > 0 )
   {
-    char * ptr = (char*) xrlist_pop(mylist);
+    char * ptr = (char*) xrlist_pop(mylist); /* remove the last item */
     printf("popped [0x%x] %s\n",(unsigned int) ptr, (char*) ptr);
-    free( ptr );
+    free( ptr ); /* free up our string */
   }
 
-  printf("-- unshift list --\n");
-  x = 0;
-  while ( x < 10 )
+  /* Add new items to the start of the list */
+  while ( mylist->count < 10 ) /* Add ten items */
   {
-    foo = (char*) malloc(32 * sizeof(char));
-    sprintf(foo,"string %d",x);
-    printf("unshifting [%s]\n",foo);
-    xrlist_unshift(mylist, (void*) foo);
-    x++;
+    char* ptr = (char*) malloc(32 * sizeof(char));
+    sprintf(ptr,"string %d",mylist->count);
+    xrlist_unshift(mylist, (void*) ptr); /* Add the pointer */
   }
 
-  printf("-- shift list --\n");
-
-  while ( mylist->count > 0 )
+  /* Remove all but 5 items from the list, starting at the first */
+  while ( mylist->count >= 5 )
   {
-    char * ptr = (char*) xrlist_shift(mylist);
+    char * ptr = (char*) xrlist_shift(mylist); /* remove the first item */
     printf("shifted [0x%x] %s\n",(unsigned int) ptr, (char*) ptr);
-    free( ptr );
+    free( ptr ); /* free up our string */
   }
 
-  printf("-- test free --\n");
-  x = 0;
-  while ( x < 10 )
-  {
-    foo = (char*) malloc(32 * sizeof(char));
-    sprintf(foo,"string %d",x);
-    xrlist_push(mylist, (void*) foo);
-    x++;
-  }
-
+  /* Remove and free everthing in the list including our strings */
   xrlist_free_items(mylist);
 
+  
+  /* Create a list and fill it with strings again */
   mylist = xrlist_new();
-
-  x = 0;
-  while ( x < 10 )
+  while ( mylist->count < 10 )
   {
-    foo = (char*) malloc(32 * sizeof(char));
-    sprintf(foo,"string %d",x);
-    xrlist_push(mylist, (void*) foo);
-    x++;
+    char * ptr = (char*) malloc(32 * sizeof(char));
+    sprintf(ptr,"string %d",mylist->count);
+    xrlist_push(mylist, (void*) ptr);
   }
 
+  /* Pop items from the list and free them ourselves */
   while ( mylist->count > 0 )
     free( xrlist_pop(mylist) );
 
+  /* Free the list structure and metadata (leave alone any objects in any items) */
   xrlist_free(mylist);
-
-
-
 
   return 0;
 }
