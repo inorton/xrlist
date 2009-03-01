@@ -119,4 +119,13 @@ void *           xrlist_shift( xr_list_t * list );
  */
 xr_list_item_t * xrlist_insert_after( xr_list_item_t * item , void * object );
 
+/**
+ * Remove a given list item
+ *
+ * \param item Pointer to the rlist item to remove
+ *
+ * \return A pointer to the memory/object stored in item
+ */
+void *           xrlist_remove( xr_list_item_t * item );
+
 #endif

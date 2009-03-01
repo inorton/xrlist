@@ -209,5 +209,23 @@ xr_list_item_t * xrlist_insert_after( xr_list_item_t * item , void * object )
   return new;
 }
 
+void *           xrlist_remove( xr_list_item_t * item )
+{
+  void * obj = NULL;
+  assert( !( item == NULL ) );
+  assert( !( item->list != NULL ) );
+
+  obj = item->object;
+
+  if ( item->prev != NULL ){
+    item->prev->next = item->next;
+  }
+  if ( item->next != NULL ){
+    item->next->prev = item->prev;
+  }
+  item->list->count--;
+  xrlist_free_item( item );
+  return obj;
+}
 
 
