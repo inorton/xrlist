@@ -142,7 +142,7 @@ int main( int argc, char** argv )
   printf("<< done\n");
 
   printf(">> populate list again\n");
-  while ( mylist->count < 10 )
+  while ( mylist->count < 100 )
   {
     char * ptr = (char*) malloc(100 * sizeof(char));
     sprintf(ptr,"a little bit of a bigger string %d",mylist->count);

@@ -27,5 +27,8 @@ xrlist_sources = Split("""xrlist.c""")
 
 env.Library('xrlist',xrlist_sources,CFLAGS=cflags)
 
+env.SharedLibrary('xrlist',xrlist_sources,CFLAGS=cflags)
+
+
 SConscript(['tests/SConscript'],exports='env')
 
