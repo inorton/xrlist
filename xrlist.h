@@ -128,4 +128,16 @@ xr_list_item_t * xrlist_insert_after( xr_list_item_t * item , void * object );
  */
 void *           xrlist_remove( xr_list_item_t * item );
 
+/** 
+ * return the Nth list item
+ *
+ * \param list pointer to the xrlist_t to fetch item n from
+ * \param n zero based index of the item to retrieve
+ *
+ * \return A pointer to the xrlist_item_t Nth in the list
+ * \return NULL if the list contains less than n items
+ */
+xr_list_item_t * xrlist_get( xr_list_t * list, unsigned int n );
+
+
 #endif

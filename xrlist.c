@@ -209,11 +209,16 @@ xr_list_item_t * xrlist_insert_after( xr_list_item_t * item , void * object )
   return new;
 }
 
-void *           xrlist_remove( xr_list_item_t * item )
+void * xrlist_remove( xr_list_item_t * item )
 {
   void * obj = NULL;
   assert( !( item == NULL ) );
-  assert( !( item->list != NULL ) );
+  assert( !( item->list == NULL ) );
+
+  if ( item == item->list->head )
+    return xrlist_shift( item->list );
+  if ( item == item->list->tail )
+    return xrlist_pop( item->list );
 
   obj = item->object;
 
@@ -228,4 +233,40 @@ void *           xrlist_remove( xr_list_item_t * item )
   return obj;
 }
 
+xr_list_item_t * xrlist_get( xr_list_t * list, unsigned int n )
+{
+  unsigned int index;
+  int direction; 
+  xr_list_item_t * ret = NULL;
+
+  if ( list == NULL )
+    return ret;
+  if ( n >= list->count )
+    return ret;
+  if ( list->count < 1 )
+    return ret;
+ 
+  if ( n > ((list->count + 1) / 2) ){ 
+    /* start from tail */
+    index = list->count - 1;
+    direction = -1;
+    ret = list->tail;
+  } else { 
+    /* start from head */
+    index = 0;
+    direction = 1;
+    ret = list->head;
+  }
+
+  while ( index != n )
+  {
+    if ( direction > 0 ){
+      ret = ret->next;
+    } else {
+      ret = ret->prev;
+    }
+    index += direction;    
+  }
+  return ret;
+}
 
