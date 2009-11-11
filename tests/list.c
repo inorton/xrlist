@@ -30,6 +30,7 @@ int main( int argc, char** argv )
   }
 
 <<<<<<< HEAD:tests/list.c
+<<<<<<< HEAD:tests/list.c
 =======
   printf("\nremoving ten heads\n");
 
@@ -49,6 +50,26 @@ int main( int argc, char** argv )
     xrlist_push(mylist, (void*) ptr); /* store the pointer to our string */
   }
 
+=======
+  printf("\nremoving ten heads\n");
+
+  while (mylist->count > 0) {
+    char * str = xrlist_remove(mylist -> head);
+    printf("%s\n", str);
+    free(str);
+  }
+
+  printf("removed all ten %d\n\n", mylist->count);
+
+  while ( mylist->count < 10 )
+  {
+    char * ptr = (char*) malloc(32 * sizeof(char)); /* push this string onto the list */
+    sprintf(ptr,"string %d",mylist->count);
+
+    xrlist_push(mylist, (void*) ptr); /* store the pointer to our string */
+  }
+
+>>>>>>> a591149... bug fix popping|removing:tests/list.c
   printf("\nremoving ten tails\n");
 
   while (mylist->count > 0) {
