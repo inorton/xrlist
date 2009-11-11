@@ -29,6 +29,54 @@ int main( int argc, char** argv )
     iter = iter->next; /* move to the next item, iter->next will be NULL when we reach the tail */
   }
 
+<<<<<<< HEAD:tests/list.c
+=======
+  printf("\nremoving ten heads\n");
+
+  while (mylist->count > 0) {
+    char * str = xrlist_remove(mylist -> head);
+    printf("%s\n", str);
+    free(str);
+  }
+
+  printf("removed all ten %d\n\n", mylist->count);
+
+  while ( mylist->count < 10 )
+  {
+    char * ptr = (char*) malloc(32 * sizeof(char)); /* push this string onto the list */
+    sprintf(ptr,"string %d",mylist->count);
+
+    xrlist_push(mylist, (void*) ptr); /* store the pointer to our string */
+  }
+
+  printf("\nremoving ten tails\n");
+
+  while (mylist->count > 0) {
+    char * str = xrlist_remove(mylist -> tail);
+    printf("%s\n", str);
+    free(str);
+  }
+
+  printf("removed all ten %d\n\n", mylist->count);
+
+  while ( mylist->count < 10 )
+  {
+    char * ptr = (char*) malloc(32 * sizeof(char)); /* push this string onto the list */
+    sprintf(ptr,"string %d",mylist->count);
+
+    xrlist_push(mylist, (void*) ptr); /* store the pointer to our string */
+  }
+
+  iter = mylist->head;
+  while ( iter != NULL ) 
+  {
+    printf("obj [0x%x] contains [%s]\n", (unsigned int) iter->object, (char*) iter->object );
+    iter = iter->next; /* move to the next item, iter->next will be NULL when we reach the tail */
+  }
+
+  printf("\npopping 10 all items\n");
+
+>>>>>>> a591149... bug fix popping|removing:tests/list.c
   /* Remove all items from the list starting at the last item */
   while ( mylist->count > 0 )
   {
